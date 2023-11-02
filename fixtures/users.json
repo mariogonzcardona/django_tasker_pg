@@ -1,0 +1,20 @@
+[
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "password": "argon2$argon2id$v=19$m=102400,t=2,p=8$S3lqY0lSOUNOV0ZjUjZ6bXVsQWoxaA$0rfg0g0dYrMsZS/rouwWyGdobNuaWOrWWfLQzEBMIxQ",
+      "last_login": "2023-11-02T13:30:39.125",
+      "is_superuser": true,
+      "username": "mario_gonzalez",
+      "first_name": "Mario Alejandro",
+      "last_name": "Gonzalez Cardona",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2023-11-02T13:04:05.502",
+      "email": "mario@hotmail.com",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]
