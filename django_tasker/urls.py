@@ -27,7 +27,10 @@ urlpatterns = [
    # Paths del Core
    path('core/',include('apps.core.urls')),
    
-   # Paths de Catalogos
+   # Paths de Home
+   path('',include('apps.home.urls')),
+   
+   # Paths de Tasks
    path('api/v1/',include('apps.tasks.urls')),
    
    # Paths de User

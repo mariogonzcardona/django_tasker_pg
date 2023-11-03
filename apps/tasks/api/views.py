@@ -7,6 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from .serializers import *
 from datetime import datetime
 from util_common.pagination import CustomPagination
+from apps.tasks.tasks import send_notification_email
 
 # Generamos la Vista para el modelo Task.
 class TaskViewSet(ModelViewSet):
@@ -58,6 +59,15 @@ class TaskViewSet(ModelViewSet):
             serializer.is_valid(raise_exception=True)
             serializer.save(user=user)
             
+            # Enviamos correo de notificacion, de creacion de tarea.
+            context = {
+                'request':request,
+                'action_type':'crear_tarea',
+                'user_email':user.email,
+                'full_name':f'{user.first_name} {user.last_name}',
+            }
+            send_notification_email(**context)
+            
             # Retornamos el objeto creado.
             return Response(serializer.data, status=status.HTTP_201_CREATED)
             
@@ -67,6 +77,9 @@ class TaskViewSet(ModelViewSet):
     # Sobre escribimos el metodo actualizar una tarea.
     def update(self, request, *args, **kwargs):
         try:
+            # Obtenemso el usuario logueado.
+            user = request.user
+            
             # Obtenemos el objeto a actualizar.
             instance = self.get_object()
             # Validamos si la tarea esta completada.
@@ -93,6 +106,15 @@ class TaskViewSet(ModelViewSet):
                 instance.date_to_finish = date_to_finish
                 instance.save()
                 
+                # Enviamos correo de notificacion, de actualizacion de tarea.
+                context = {
+                    'request':request,
+                    'action_type':'actualizcion_tarea',
+                    'user_email':user.email,
+                    'full_name':f'{user.first_name} {user.last_name}',
+                }
+                send_notification_email(**context)
+                
                 # Se retorna la respuesta.
                 return Response({'detail':'Tarea actualizada.'}, status=status.HTTP_200_OK)
                 
@@ -102,6 +124,9 @@ class TaskViewSet(ModelViewSet):
     # Sobre escribimos el metodo eliminar una tarea, ya que no se elimina, solo se desactiva.
     def destroy(self, request, *args, **kwargs):
        try:
+        # Obtenemso el usuario logueado.
+        user = request.user
+        
         # Obtenemos el objeto a eliminar.
         instance = self.get_object()
         # Validamos si la tarea esta completada.
@@ -114,6 +139,15 @@ class TaskViewSet(ModelViewSet):
             instance = self.get_object()
             instance.status = False
             instance.save()
+            
+            # Enviamos correo de notificacion, de actualizacion de tarea.
+            context = {
+                'request':request,
+                'action_type':'eliminacion_tarea',
+                'user_email':user.email,
+                'full_name':f'{user.first_name} {user.last_name}',
+            }
+            send_notification_email(**context)
             # Se retorna la respuesta.
             return Response({'detail':'Tarea eliminada.'}, status=status.HTTP_200_OK)
        except Exception as e:

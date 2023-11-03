@@ -10,6 +10,8 @@ class CrearTaskSerializer(serializers.ModelSerializer):
 
 # Serializer para Listar todas las tareas.
 class ListarTaskSerializer(serializers.ModelSerializer):
+    # Obtenemos el email de user
+    user=serializers.CharField(source='user.email')
     completed = serializers.SerializerMethodField()
     status = serializers.SerializerMethodField()
     
