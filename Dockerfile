@@ -8,10 +8,9 @@ RUN mkdir -p /code
 WORKDIR /app
 
 #install the linux packages, since these are the dependencies of some python packages
-RUN  apk update \
-	&& apk add --no-cache \
+RUN apt-get update && apt-get install -y \
     gcc \
-	&& pip install --upgrade pip
+    && rm -rf /var/lib/apt/lists/* 
 
 COPY ./requirements.txt ./
 
