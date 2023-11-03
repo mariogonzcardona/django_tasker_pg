@@ -6,7 +6,7 @@ python manage.py collectstatic --no-input --settings=django_tasker.settings.loca
 echo 'Ejecutando restore_db.py'
 if [ "$DEBUG" = "True" ]; then
   echo 'Executing Python script...'
-  python sql_commands/restore_db.py
+  python ./sql_commands/restore_db.py
 fi
 python manage.py makemigrations --settings=siarf.settings.local
 python manage.py migrate --settings=siarf.settings.local
