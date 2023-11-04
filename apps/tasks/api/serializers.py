@@ -35,7 +35,6 @@ class ListarTaskSerializer(serializers.ModelSerializer):
 # Serializer para Actualizar una tarea.
 class ActualizarTaskSerializer(serializers.ModelSerializer):
     completed = serializers.BooleanField(default=False)
-    
     class Meta:
         model = Task
         fields = ['title','description','completed','date_to_finish']
