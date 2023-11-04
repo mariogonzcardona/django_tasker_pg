@@ -119,7 +119,7 @@ def create_migrations():
 
     call_command('makemigrations')
     call_command('migrate')
-    call_command('loaddata', './fixtures/users.json')
+    call_command('loaddata', './fixtures/full_db.json')
     
 def main():
     try:
