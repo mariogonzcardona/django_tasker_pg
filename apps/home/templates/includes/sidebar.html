@@ -6,17 +6,14 @@
     font-size: 2rem;
     font-weight: 900;">Django Tasker</h3>
   </div>
-  {% if user.is_authenticated %}
   <div class="sidebar-wrapper">
     <ul class="nav">
-      
       <li class="nav-item ">
-        <a class="nav-link" href="#" >
+        <a class="nav-link" href="#" id="logoutButton">
           <i class="material-icons">directions_run</i>
           <p>Logout</p>
         </a>
       </li>
     </ul>
   </div>
-  {% endif %}
 </div>

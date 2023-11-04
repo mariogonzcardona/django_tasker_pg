@@ -66,10 +66,10 @@ class TaskViewSet(ModelViewSet):
                 'user_email':user.email,
                 'full_name':f'{user.first_name} {user.last_name}',
             }
-            send_notification_email(**context)
+            # send_notification_email(**context)
             
-            # Retornamos el objeto creado.
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            # Retornamos la respuesta.
+            return Response({'detail':'Tarea creada.'}, status=status.HTTP_201_CREATED)
             
         except Exception as e:
             return Response({'detail':str(e)}, status=status.HTTP_400_BAD_REQUEST)

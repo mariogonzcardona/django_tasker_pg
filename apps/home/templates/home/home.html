@@ -1,5 +1,5 @@
 {% extends 'home/base.html' %}
-{% block title %}Punto 1{% endblock %}
+
 <!-- Inicio de contenido -->
 {%block content %}
 
@@ -27,35 +27,78 @@
                     <div class="tab-content">
                         <!-- Por Productos -->
                         <div class="tab-pane active">
-                            <!-- Tabla de Contenido -->
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table id="tasks_table" class="table table-hover" width=100%>
-                                        <thead>
-                                            <tr>
-                                                <th>Id</th>
-                                                <th>Titulo</th>
-                                                <th>Descripcion</th>
-                                                <th>Completada</th>
-                                                <th>Fecha Fin</th>
-                                                <th>Correo</th>
-                                                <th>Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tasks_table_body">
-                                            <!-- Los datos de las tareas se insertarán aquí a través de JavaScript -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                            <!-- Botón para agregar tarea -->
+                            <button type="button" class="btn btn-success" data-toggle="modal"
+                                data-target="#addTaskModal">
+                                Agregar Tarea
+                            </button>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Tabla de tareas -->
+                <div class="container mt-3">
+                    <span id="tasks_count">Total de Tareas: 0</span>
+                    <!-- Tabla responsive -->
+                    <div class="table-responsive">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Título</th>
+                                    <th>Descripción</th>
+                                    <th>Correo</th>
+                                    <th>Completada</th>
+                                    <th>Fecha Fin</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tasks_table_body">
+                                <!-- Los datos de las tareas se insertarán aquí dinámicamente -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
 </form>
+
+<!-- Modal para agregar tarea -->
+<div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog" aria-labelledby="addTaskModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addTaskModalLabel">Agregar Nueva Tarea</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulario para nueva tarea -->
+                <form id="addTaskForm">
+                    <div class="form-group">
+                        <label for="taskTitle">Título</label>
+                        <input type="text" class="form-control" id="taskTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskDescription">Descripción</label>
+                        <textarea class="form-control" id="taskDescription" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskEndDate">Fecha Fin</label>
+                        <input type="date" class="form-control" id="taskEndDate" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="addTask()">Guardar Tarea</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 {%endblock%}
 <!-- Fin de contenido -->
@@ -63,49 +106,9 @@
 
 {% block javascripts %}
 
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link href="https://nightly.datatables.net/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
 <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#tasks_table').DataTable({
-            columnDefs: [{
-                targets: 1,
-                render: function (data, type, row) {
-                    return data.substr(0, 40);
-                }
-            }],
-            "lengthMenu": [5, 10, 15, 20],
-            language: {
-                "decimal": "",
-                "emptyTable": "No hay información",
-                "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-                "infoPostFix": "",
-                "thousands": ",",
-                "lengthMenu": "Mostrar  _MENU_  Entradas",
-                "loadingRecords": "Cargando...",
-                "processing": "Procesando...",
-                "search": "Buscar:",
-                "zeroRecords": "Sin resultados encontrados",
-                "paginate": {
-                    "first": "Primero",
-                    "last": "Ultimo",
-                    "next": "Siguiente",
-                    "previous": "Anterior"
-                }
-            },
-            "columns": [
-                { "width": "5%" },
-                { "width": "15%" },
-                { "width": "15%" },
-                { "width": "15%" },
-                { "width": "15%" },
-                { "width": "10%" },
-                { "width": "10%" },
-            ]
-        });
-    });
-</script>
 {% endblock javascripts %}

@@ -12,8 +12,8 @@ class CrearTaskSerializer(serializers.ModelSerializer):
 class ListarTaskSerializer(serializers.ModelSerializer):
     # Obtenemos el email de user
     user=serializers.CharField(source='user.email')
-    completed = serializers.SerializerMethodField()
-    status = serializers.SerializerMethodField()
+    # completed = serializers.SerializerMethodField()
+    # status = serializers.SerializerMethodField()
     
     # Formateamos la fecha de creacion y actualizacion.
     updated_at = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")

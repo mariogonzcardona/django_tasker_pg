@@ -17,9 +17,8 @@ body {
 
 .card {
     height: 290px;
-    margin-top: auto;
-    margin-bottom: auto;
-    width: 400px;
+    margin: auto 0 auto 0;
+    width: 450px;
     background-color: rgba(0, 0, 0, 0.5) !important;
 }
 

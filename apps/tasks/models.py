@@ -18,13 +18,13 @@ class Task(models.Model):
     def __str__(self):
         return self.title + ' | ' + self.description
     
-    # Nuevo método para devolver si es completada como una cadena
-    def get_completed_display(self):
-        return 'Completada' if self.completed else 'No completada'
+    # # Nuevo método para devolver si es completada como una cadena
+    # def get_completed_display(self):
+    #     return 'Completada' if self.completed else 'No completada'
 
-    # Nuevo método para devolver el estado como una cadena
-    def get_status_display(self):
-        return 'Activo' if self.status else 'Inactivo'
+    # # Nuevo método para devolver el estado como una cadena
+    # def get_status_display(self):
+    #     return 'Activo' if self.status else 'Inactivo'
     
     class Meta:
         db_table = 'TASKER_task'

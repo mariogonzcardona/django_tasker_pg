@@ -2,11 +2,11 @@
 document.getElementById("btnLogin").addEventListener("click", login);
 
 async function login() {
-    const username = document.getElementById('inputUsername').value;
+    const email = document.getElementById('inputEmail').value;
     const password = document.getElementById('inputPass').value;
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
-    console.log(username, password, csrftoken);
+    console.log(email, password, csrftoken);
 
     fetch('/api/v1/user/login', {
         method: 'POST',
@@ -15,7 +15,7 @@ async function login() {
             'X-CSRFToken': csrftoken
         },
         body: JSON.stringify({
-            email: username,
+            email: email,
             password: password
         })
     })
