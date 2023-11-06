@@ -67,7 +67,7 @@ class TaskViewSet(ModelViewSet):
                 'user_email':user.email,
                 'full_name':f'{user.first_name} {user.last_name}',
             }
-            # send_notification_email(**context)
+            send_notification_email(**context)
             
             # Retornamos la respuesta.
             return Response({'detail':'Tarea creada.'}, status=status.HTTP_201_CREATED)
@@ -116,14 +116,14 @@ class TaskViewSet(ModelViewSet):
 
                 instance.save()
                 
-                # # Enviamos correo de notificación, de actualización de tarea.
-                # context = {
-                #     'request': request,
-                #     'action_type': 'actualizacion_tarea',
-                #     'user_email': user.email,
-                #     'full_name': f'{user.first_name} {user.last_name}',
-                # }
-                # send_notification_email(**context)
+                # Enviamos correo de notificación, de actualización de tarea.
+                context = {
+                    'request': request,
+                    'action_type': 'actualizacion_tarea',
+                    'user_email': user.email,
+                    'full_name': f'{user.first_name} {user.last_name}',
+                }
+                send_notification_email(**context)
                 
                 # Se retorna la respuesta.
                 return Response({'detail':'Tarea actualizada.'}, status=status.HTTP_200_OK)
@@ -151,14 +151,14 @@ class TaskViewSet(ModelViewSet):
             instance.status = False
             instance.save()
             
-            # # Enviamos correo de notificacion, de actualizacion de tarea.
-            # context = {
-            #     'request':request,
-            #     'action_type':'eliminacion_tarea',
-            #     'user_email':user.email,
-            #     'full_name':f'{user.first_name} {user.last_name}',
-            # }
-            # send_notification_email(**context)
+            # Enviamos correo de notificacion, de actualizacion de tarea.
+            context = {
+                'request':request,
+                'action_type':'eliminacion_tarea',
+                'user_email':user.email,
+                'full_name':f'{user.first_name} {user.last_name}',
+            }
+            send_notification_email(**context)
             # Se retorna la respuesta.
             return Response({'detail':'Tarea eliminada.'}, status=status.HTTP_200_OK)
        except Exception as e:
